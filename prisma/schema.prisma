@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -6,6 +9,10 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+// npx prisma migrate dev --name init     # cria migração do banco
+// npx prisma db pull --force                  # gera os models apartir do DB
+// npx prisma generate                    # define as tipagens das tabelas
 
 model tb_menasures {
   id        Int      @id @default(autoincrement())
