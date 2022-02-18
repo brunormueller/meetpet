@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model tb_menasures {
+  id        Int      @id @default(autoincrement())
+  menasure  Decimal  @db.Decimal(5, 2)
+  date_time DateTime @default(now())
+}
