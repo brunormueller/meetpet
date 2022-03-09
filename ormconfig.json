@@ -1,0 +1,14 @@
+{
+    "type": "mysql",
+    "host": "127.0.0.1",
+    "port": "3306",
+    "username": "meet_pet_dbo",
+    "password": "P@ssw0rd",
+    "database": "meet_pet",
+    "synchronize": false,
+    "logging": true,
+    "entities": [
+        "src//*.entity.ts",
+        "dist//*entity.ts"
+    ]
+}
