@@ -1,0 +1,14 @@
+{
+    "type": "TYPE_DB",
+    "host": "IP_OR_NAME_SERVER",
+    "port": "PORT_DB",
+    "username": "USER_DB",
+    "password": "PASSWORD_DB",
+    "database": "NAME_BB",
+    "synchronize": false,
+    "logging": true,
+    "entities": [
+        "src//*.entity.ts",
+        "dist//*entity.ts"
+    ]
+}
