@@ -7,8 +7,23 @@ export class CreateUserDto {
   @IsNotEmpty()
   name: string;
 
+  @ApiProperty({ example: 'A' })
+  @IsString()
+  @IsNotEmpty()
+  type: string;
+
   @ApiProperty({ example: 'luid@email.com.br' })
   @IsNotEmpty()
   @IsString()
-  username: string;
+  login: string;
+
+  @ApiProperty({ example: '123qweasdzxc' })
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @ApiProperty({ example: 'image.jpg' })
+  @IsString()
+  @IsNotEmpty()
+  photo: string;
 }

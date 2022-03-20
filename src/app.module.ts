@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from './users/users.module';
+import { BreedsModule } from './breeds/breeds.module';
+import { PetModule } from './pet/pet.module';
+import { PhotosModule } from './photos/photos.module';
+import { RegionModule } from './region/region.module';
+import { AdoptionModule } from './adoption/adoption.module';
 
 @Module({
   imports: [
@@ -19,8 +22,11 @@ import { UserModule } from './users/users.module';
       synchronize: process.env.DB_SYNCHRONIZE === 'true',
     }),
     UserModule,
+    BreedsModule,
+    PetModule,
+    PhotosModule,
+    RegionModule,
+    AdoptionModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
