@@ -7,6 +7,11 @@ export class CreateRegionDto {
   @IsNotEmpty()
   password: string;
 
+  @ApiProperty({ example: 'name_region' })
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
   @ApiProperty({ example: '-38.9484765' })
   @IsString()
   @IsNotEmpty()

@@ -33,7 +33,7 @@ export class BreedsService {
       throw new NotFoundException(`Breed ${id} not found`);
     }
 
-    return this.repository.save(Breed);
+    return this.repository.save(breed);
   }
 
   async remove(id: string) {

@@ -37,6 +37,6 @@ export class User extends BaseEntity {
   @OneToMany(() => Region, (region) => region.id)
   region: Region[];
 
-  @ManyToOne(() => Adoption, (adoption) => adoption.user_adoption)
-  adoption: Adoption;
+  @OneToMany(() => Adoption, (adoption) => adoption.user)
+  user_adoption: Adoption[];
 }

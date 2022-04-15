@@ -9,6 +9,7 @@ import {
   ManyToOne,
   ManyToMany,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 
 @Entity({ name: 'pets' })
@@ -37,6 +38,9 @@ export class Pet extends BaseEntity {
   })
   breed: Breed;
 
-  @ManyToMany(() => Adoption, (adoption) => adoption.pet_adoption)
-  adoption: string;
+  @OneToMany(() => Adoption, (adoption) => adoption.user)
+  adoption: Adoption[];
+
+  @OneToMany(() => Adoption, (adoption) => adoption.pet)
+  pet_adoption: Adoption[];
 }
