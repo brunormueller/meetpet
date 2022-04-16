@@ -1,11 +1,13 @@
+import { Token } from './../../token/entities/token.entity';
 import { Adoption } from './../../adoption/entities/adoption.entity';
 import { Region } from './../../region/entities/region.entity';
 import {
   BaseEntity,
   Column,
   Entity,
-  ManyToOne,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -39,4 +41,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Adoption, (adoption) => adoption.user)
   user_adoption: Adoption[];
+
+  @OneToOne(() => Token, (token) => token.user)
+  user_token: Token[];
 }

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './users/users.module';
 import { BreedsModule } from './breeds/breeds.module';
 import { PetModule } from './pet/pet.module';
 import { PhotosModule } from './photos/photos.module';
 import { RegionModule } from './region/region.module';
 import { AdoptionModule } from './adoption/adoption.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,12 +21,12 @@ import { AdoptionModule } from './adoption/adoption.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: process.env.DB_SYNCHRONIZE === 'true',
     }),
-    UserModule,
     BreedsModule,
     PetModule,
     PhotosModule,
     RegionModule,
     AdoptionModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

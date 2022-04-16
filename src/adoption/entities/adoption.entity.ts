@@ -9,13 +9,11 @@ export class Adoption {
 
   @ManyToOne(() => Pet, (pet) => pet.pet_adoption, {
     nullable: false,
-    eager: true,
   })
   pet: Pet;
 
   @ManyToOne(() => User, (user) => user.user_adoption, {
     nullable: false,
-    eager: true,
   })
   user: User;
 
