@@ -10,10 +10,10 @@ import {
   Param,
   Delete,
   UseGuards,
-  Request,
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { LoginUserDto } from './dto/login-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 @ApiTags('Users')
@@ -31,8 +31,8 @@ export class UsersController {
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
+  login(@Body() loginUserDto: LoginUserDto) {
+    return this.authService.login(loginUserDto.login);
   }
 
   @UseGuards(JwtAuthGuard)
