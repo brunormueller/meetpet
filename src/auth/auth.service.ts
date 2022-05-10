@@ -1,6 +1,14 @@
+import { LoginUserDto } from './../users/dto/login-user.dto';
+import { AutoLoginUserDto } from './../users/dto/auto-login-user.dto';
 import { TokenService } from './../token/token.service';
 import { UserService } from './../users/users.service';
-import { Inject, Injectable, forwardRef } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  forwardRef,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -23,14 +31,29 @@ export class AuthService {
     return null;
   }
 
-  async login(user_login: any) {
-    const payload = { username: user_login.login, sub: user_login.userId };
+  async login(loginUserDto: LoginUserDto) {
+    const user = await this.userService.findOneByLogin(loginUserDto.login);
+    const payload = { username: user.login, sub: user.id };
     const token = this.jwtService.sign(payload);
-    const user = await this.userService.findOneByLogin(user_login.login);
 
     this.tokenService.save(token, user);
     return {
       access_token_meet_pet: token,
     };
+  }
+
+  async autoLogin(autoLoginUserDto: AutoLoginUserDto) {
+    const user = await this.tokenService.getUserByToken(autoLoginUserDto.token);
+    console.log(user);
+    if (user) {
+      return this.login(user);
+    } else {
+      return new HttpException(
+        {
+          message: 'Não autorizado',
+        },
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
   }
 }

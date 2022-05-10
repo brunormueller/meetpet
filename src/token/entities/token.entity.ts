@@ -17,6 +17,6 @@ export class Token extends BaseEntity {
   hash: string;
 
   @OneToOne(() => User, (user) => user.user_token)
-  @JoinColumn()
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 }

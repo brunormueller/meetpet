@@ -1,3 +1,5 @@
+import { UserService } from './../users/users.service';
+import { LoginUserDto } from './../users/dto/login-user.dto';
 import { AuthService } from './../auth/auth.service';
 import { User } from './../users/entities/user.entity';
 import {
@@ -17,17 +19,33 @@ export class TokenService {
     @InjectRepository(Token) private readonly repository: Repository<Token>,
     @Inject(forwardRef(() => AuthService))
     private authService: AuthService,
+    private userService: UserService,
   ) {}
+
+  async getUserByToken(token: string) {
+    const objToken = await this.repository.findOne(
+      { hash: token },
+      { relations: ['user'] },
+    );
+
+    if (objToken) {
+      const user: LoginUserDto = await this.userService.findOneById(
+        objToken.user.id,
+      );
+      return user;
+    } else {
+      return null;
+    }
+  }
 
   async save(hash: string, user: User) {
     this.repository.upsert({ hash, user }, ['user']);
   }
 
   async refreshToken(old_token: string) {
-    const token = await this.repository.findOne({ hash: old_token });
+    const user = await this.getUserByToken(old_token);
 
-    if (token) {
-      const user = await this.repository.findOne(token.user);
+    if (user) {
       return this.authService.login(user);
     } else {
       return new HttpException(
