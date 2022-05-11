@@ -37,9 +37,17 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
 
     this.tokenService.save(token, user);
-    return {
+
+    const result = {
+      ...user,
       access_token_meet_pet: token,
     };
+
+    delete result.id;
+    delete result.login;
+    delete result.password;
+
+    return result;
   }
 
   async autoLogin(autoLoginUserDto: AutoLoginUserDto) {
