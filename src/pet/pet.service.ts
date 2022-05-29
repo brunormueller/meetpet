@@ -33,7 +33,7 @@ export class PetService {
       throw new NotFoundException(`Pet ${id} not found`);
     }
 
-    return this.repository.save(Pet);
+    return this.repository.save(pet);
   }
 
   async remove(id: string) {
